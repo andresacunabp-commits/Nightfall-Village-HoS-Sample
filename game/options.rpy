@@ -1,6 +1,6 @@
-define config.name = _("Nightfall Village — Shinobi Sandbox Systems Demo")
-define config.version = "0.3.0"
-define build.name = "nightfall_village_shinobi_systems_demo"
+define config.name = _("Nightfall Village — Shinobi Sandbox Portfolio Demo")
+define config.version = "0.7.0"
+define build.name = "nightfall_village_shinobi_portfolio_demo"
 
 define gui.show_name = True
 
