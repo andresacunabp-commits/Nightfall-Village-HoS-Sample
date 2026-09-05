@@ -75,4 +75,5 @@ jobs:
             exit 0
           fi
           git commit -m 'art: generate v0.10.4 EDSR scenario backgrounds'
+          git pull --rebase origin temp-v104-quality
           git push origin HEAD:temp-v104-quality
