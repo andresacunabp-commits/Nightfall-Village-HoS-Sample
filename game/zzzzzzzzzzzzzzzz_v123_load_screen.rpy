@@ -1,152 +1,201 @@
 # ============================================================
-# NIGHTFALL VILLAGE v0.12.3 — LOAD SCREEN
+# NIGHTFALL VILLAGE v0.12.5 — LOAD SCREEN REDESIGN
 # ============================================================
-# Uses the custom Aya background and the project's native six-slot
-# save/load layout. No dependency on the default Ren'Py file_slots.
+# HoS-style structure: left navigation, page title, 3x2 save grid,
+# and page controls along the bottom. Uses the project's own assets.
 # ============================================================
+
+style nv125_load_nav is button:
+    background None
+    hover_background Solid("#07354ae8")
+    xsize 235
+    ysize 40
+    xpadding 10
+    ypadding 6
+
+style nv125_load_nav_text is button_text:
+    size 18
+    color "#8f9aa0"
+    hover_color "#ffffff"
+    xalign 0.0
+
+style nv125_load_nav_active is nv125_load_nav:
+    background Solid("#075f77dd")
+
+style nv125_load_nav_active_text is nv125_load_nav_text:
+    color "#ffffff"
+    bold True
+
+style nv125_page_button is button:
+    background None
+    hover_background Solid("#07354ae8")
+    selected_background Solid("#075f77dd")
+    xminimum 32
+    yminimum 32
+    xpadding 6
+    ypadding 3
+
+style nv125_page_button_text is button_text:
+    size 18
+    color "#8d989e"
+    hover_color "#ffffff"
+    selected_color "#ffffff"
+    xalign 0.5
+
 
 screen load():
     tag menu
 
-    add "images/ui/load_bg.png"
-    add Solid("#0000004d")
+    # Full cinematic background.
+    add im.Scale("images/ui/load_bg.png", 1280, 720)
+    add Solid("#02070aa8")
 
-    # Left title/navigation strip.
+    # --------------------------------------------------------
+    # LEFT NAVIGATION
+    # --------------------------------------------------------
     frame:
         xpos 0
         ypos 0
-        xsize 310
+        xsize 330
         ysize 720
-        background Solid("#02080dea")
-        padding (28, 28)
+        background Solid("#02080dcc")
+        padding (34, 18)
 
         fixed:
             xfill True
             yfill True
 
-            add "images/ui/nightfall_logo.png":
-                xpos 0
+            text "Cargar":
+                xpos 12
                 ypos 0
-                zoom 0.40
+                size 46
+                color "#08bfe9"
 
-            text "CARGAR":
-                xpos 4
-                ypos 150
-                size 38
-                bold True
-                color "#39cfff"
+            vbox:
+                xpos 0
+                ypos 90
+                spacing 1
 
-            text "Continúa una partida guardada.":
-                xpos 4
-                ypos 198
-                xmaximum 245
-                size 13
-                color "#9cb7c2"
+                textbutton "Comenzar" action Start("nv12_start") style "nv125_load_nav"
+                textbutton "Cargar" action NullAction() style "nv125_load_nav_active"
+                textbutton "Galería" action ShowMenu("nv12_gallery") style "nv125_load_nav"
+                textbutton "Repetir escenas" action ShowMenu("nv12_replay") style "nv125_load_nav"
+                textbutton "Preferencias" action ShowMenu("preferences") style "nv125_load_nav"
+                textbutton "Acerca de" action ShowMenu("nv12_about") style "nv125_load_nav"
+                textbutton "Ayuda" action ShowMenu("nv12_help") style "nv125_load_nav"
+                textbutton "Salir" action Quit(confirm=False) style "nv125_load_nav"
 
-            textbutton "← VOLVER":
-                xpos 4
-                ypos 620
+            add Solid("#00c8ff"):
+                xpos 292
+                ypos 80
+                xsize 2
+                ysize 550
+
+            textbutton "Regresar":
+                xpos 0
+                ypos 625
                 action Return()
-                style "v06_small_button"
+                style "nv125_load_nav"
 
-    # Save slots.
-    frame:
-        xpos 330
-        ypos 32
+    # --------------------------------------------------------
+    # RIGHT CONTENT
+    # --------------------------------------------------------
+    fixed:
+        xpos 360
+        ypos 0
         xsize 920
-        ysize 656
-        background Solid("#02080dba")
-        padding (24, 22)
+        ysize 720
 
-        vbox:
-            spacing 15
+        text "Página {}".format(FilePageName(auto="A", quick="Q")):
+            xpos 0
+            ypos 88
+            xsize 900
+            text_align 0.5
+            size 24
+            color "#11c7ee"
 
-            hbox:
-                xfill True
-                text "PARTIDAS GUARDADAS" size 24 bold True color "#ffffff"
-                text "Selecciona una partida para continuar" size 12 color "#8ba3ad" xalign 1.0 yalign 0.5
+        # 3 x 2 slots, deliberately wide and simple like the reference.
+        grid 3 2:
+            xpos 35
+            ypos 160
+            spacing 28
 
-            grid 3 2:
-                spacing 14
+            for slot in range(1, 7):
+                $ _has_save = FileTime(slot, empty="") != ""
 
-                for slot in range(1, 7):
-                    button:
-                        xsize 278
-                        ysize 268
-                        background Solid("#06131cdd")
-                        hover_background Solid("#0a3547ee")
-                        action FileLoad(slot)
+                button:
+                    xsize 245
+                    ysize 170
+                    background Solid("#064e64e8")
+                    hover_background Solid("#08738fe8")
+                    insensitive_background Solid("#064e64e8")
+                    sensitive _has_save
+                    action FileLoad(slot)
 
-                        fixed:
-                            xfill True
-                            yfill True
+                    fixed:
+                        xfill True
+                        yfill True
 
-                            add Solid("#00c8ff55"):
+                        if _has_save:
+                            add FileScreenshot(slot):
+                                xysize (245, 138)
+
+                            add Solid("#00000088"):
+                                ypos 112
+                                xsize 245
+                                ysize 26
+
+                            text FileTime(slot, format="%d/%m/%Y  %H:%M", empty=""):
+                                xpos 8
+                                ypos 116
+                                size 11
+                                color "#ffffff"
+
+                            text FileSaveName(slot):
+                                xpos 8
+                                ypos 143
+                                xmaximum 225
+                                size 11
+                                color "#b8cbd2"
+                        else:
+                            text "espacio vacío":
                                 xpos 0
-                                ypos 0
-                                xsize 278
-                                ysize 2
+                                ypos 143
+                                xsize 245
+                                text_align 0.5
+                                size 12
+                                color "#65767d"
 
-                            if FileTime(slot, empty="") != "":
-                                add FileScreenshot(slot):
-                                    xpos 12
-                                    ypos 12
-                                    xysize (254, 143)
+        # Page selector: < A Q 1 2 3 4 5 6 7 8 9 >
+        hbox:
+            xpos 165
+            ypos 585
+            spacing 2
 
-                                add Solid("#00000055"):
-                                    xpos 12
-                                    ypos 112
-                                    xsize 254
-                                    ysize 43
+            textbutton "<" action FilePagePrevious() style "nv125_page_button"
 
-                                text "SLOT [slot]":
-                                    xpos 18
-                                    ypos 120
-                                    size 18
-                                    bold True
-                                    color "#ffffff"
+            textbutton "A":
+                action FilePage("auto")
+                selected FilePageName(auto="A", quick="Q") == "A"
+                style "nv125_page_button"
 
-                                text FileTime(slot, format="%d/%m/%Y  •  %H:%M", empty=""):
-                                    xpos 16
-                                    ypos 174
-                                    size 12
-                                    color "#8fc4d1"
+            textbutton "Q":
+                action FilePage("quick")
+                selected FilePageName(auto="A", quick="Q") == "Q"
+                style "nv125_page_button"
 
-                                text FileSaveName(slot):
-                                    xpos 16
-                                    ypos 198
-                                    xmaximum 245
-                                    size 12
-                                    color "#c9d7dc"
+            for _page in range(1, 10):
+                textbutton str(_page):
+                    action FilePage(_page)
+                    selected FilePageName(auto="A", quick="Q") == str(_page)
+                    style "nv125_page_button"
 
-                                text "CARGAR  →":
-                                    xpos 184
-                                    ypos 235
-                                    size 11
-                                    bold True
-                                    color "#39cfff"
+            textbutton ">" action FilePageNext(max=9) style "nv125_page_button"
 
-                            else:
-                                text "SLOT [slot]":
-                                    xpos 18
-                                    ypos 18
-                                    size 18
-                                    bold True
-                                    color "#667982"
-
-                                text "VACÍO":
-                                    xpos 0
-                                    ypos 112
-                                    xsize 278
-                                    text_align 0.5
-                                    size 16
-                                    bold True
-                                    color "#53656d"
-
-                                text "No hay una partida guardada en este espacio.":
-                                    xpos 28
-                                    ypos 145
-                                    xmaximum 220
-                                    text_align 0.5
-                                    size 11
-                                    color "#52666e"
+        text "Selecciona un espacio guardado para continuar.":
+            xpos 0
+            ypos 640
+            xsize 900
+            text_align 0.5
+            size 14
+            color "#7d898f"
