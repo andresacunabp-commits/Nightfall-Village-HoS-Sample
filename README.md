@@ -1,4 +1,4 @@
-# Nightfall Village — Shinobi Sandbox Portfolio Demo v0.8
+# Nightfall Village — Shinobi Sandbox Portfolio Demo v0.9
 
 Original Ren'Py/Python portfolio project designed to demonstrate the systems and development workflow needed by a large nonlinear shinobi sandbox visual novel.
 
@@ -23,11 +23,20 @@ Original Ren'Py/Python portfolio project designed to demonstrate the systems and
 - Route-aware mission scenes
 - Live progression controls for testing conditions
 
+### v0.9 — Visual World Overhaul
+- Cinematic world hub instead of a flat prototype map
+- Destination cards with live event / character / lock status
+- Current objective surfaced directly in navigation
+- Per-location accent identity and scene chrome
+- Animated ambient particles on outdoor scenes
+- Stronger atmosphere and readability across all districts
+- Cinematic composites that enrich the original placeholder backgrounds
+
 ## Core sandbox systems
 
 - Original cinematic main menu and visual identity
 - Bottom-anchored dialogue UI
-- Visual world map
+- Cinematic world hub
 - Morning / Afternoon / Evening / Night cycle
 - NPC schedules
 - Love / Hatred relationship routes
@@ -50,7 +59,7 @@ This project does **not** copy House of Shinobi characters, art, dialogue, CGs, 
 
 ## Recommended portfolio demos
 
-From the main menu, launch **Household Demo** to see room navigation and branching relationship state, then launch **Mission Control** to see mission dependencies and schedule-driven gameplay.
+Start with **World Hub** to see the visual sandbox navigation and live location state, then launch **Household Demo** for room-based relationship events and **Mission Control** for mission dependencies and schedule-driven gameplay.
 
 ## Developer shortcuts
 
