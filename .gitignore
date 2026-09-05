@@ -1,0 +1,11 @@
+game/cache/
+game/saves/
+**/*.rpyc
+**/*.bak
+*.disabled.*
+backup_before_*/
+_ui_backup_*/
+_v*_backup_*/
+*.log
+traceback.txt
+errors.txt

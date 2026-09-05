@@ -1,0 +1,8 @@
+define config.name = _("Nightfall Village — Shinobi Sandbox Systems Demo")
+define config.version = "0.3.0"
+define build.name = "nightfall_village_shinobi_systems_demo"
+
+define gui.show_name = True
+
+# Portfolio build: original characters, dialogue, UI and generated backgrounds.
+# The architecture demonstrates sandbox visual-novel systems in Ren'Py/Python.
