@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.2
+- Removed the old geometric prototype layer from gameplay scenes.
+- Forced the cinematic scenario artwork to be the final background authority.
+- Rebuilt the World Hub around image-led destination cards.
+- Reduced scene chrome so the environment art remains visible.
+- Prevented the gameplay HUD from duplicating the World Hub header.
+- Preserved all existing sandbox logic, schedules, routes, events and saves.
+
 ## 0.10.1
 - Replaced flat prototype scenery with seven dedicated cinematic location backgrounds.
 - Added Village Square, Market Alley, Training Ground, Riverside and Shrine Path art.
