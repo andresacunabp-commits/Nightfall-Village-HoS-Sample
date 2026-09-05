@@ -1,6 +1,7 @@
 # ============================================================
-# NIGHTFALL VILLAGE v0.7 — MAIN MENU OVERRIDE
-# Loaded after the v0.6 visual layer so the visible build is 0.7.
+# NIGHTFALL VILLAGE v0.8 — FINAL MAIN MENU OVERRIDE
+# This file loads after the older visual layers and is therefore
+# the authoritative visible menu for the current portfolio build.
 # ============================================================
 
 style v07_main_button is button:
@@ -8,12 +9,12 @@ style v07_main_button is button:
     hover_background Solid("#073548e8")
     selected_background Solid("#08445ae8")
     xsize 270
-    yminimum 45
+    yminimum 42
     xpadding 16
-    ypadding 7
+    ypadding 6
 
 style v07_main_button_text is button_text:
-    size 19
+    size 18
     color "#aebbc4"
     hover_color "#ffffff"
     selected_color "#00d8ff"
@@ -30,7 +31,8 @@ style v07_feature_button_text is button_text:
     color "#dff8ff"
     hover_color "#ffffff"
 
-# Disable the old floating v0.7 addon because the new menu includes it directly.
+# Disable the old floating v0.7 addon because the current menu includes
+# the portfolio entry points directly.
 screen v07_main_menu_addon():
     pass
 
@@ -69,8 +71,8 @@ screen main_menu():
 
             vbox:
                 xpos 0
-                ypos 196
-                spacing 3
+                ypos 188
+                spacing 2
 
                 textbutton "▶   Continue":
                     action ShowMenu("load")
@@ -82,6 +84,10 @@ screen main_menu():
 
                 textbutton "✦   Household Demo":
                     action Start("v07_house_demo_start")
+                    style "v07_main_button"
+
+                textbutton "◆   Mission Control":
+                    action Start("v08_mission_control_start")
                     style "v07_main_button"
 
                 textbutton "◫   Aya Story Demo":
@@ -113,13 +119,13 @@ screen main_menu():
                 ypos 612
                 zoom 0.50
 
-            text "v0.7.0 • Household Vertical Slice":
+            text "v0.8.0 • Mission Control Build":
                 xpos 14
                 ypos 636
                 size 13
                 color "#8da6b0"
 
-            text "Sandbox • relationships • event tooling":
+            text "Sandbox • schedules • missions • routes":
                 xpos 14
                 ypos 658
                 size 11
@@ -143,7 +149,7 @@ screen main_menu():
         padding (18, 8)
 
         hbox:
-            spacing 42
+            spacing 34
             xalign 0.5
 
             vbox:
@@ -151,65 +157,73 @@ screen main_menu():
                 text "Room + world navigation" size 11 color "#c4d2d7"
 
             vbox:
+                text "SCHEDULES" size 12 bold True color "#00c8ff" xalign 0.5
+                text "NPC availability" size 11 color "#c4d2d7"
+
+            vbox:
+                text "MISSIONS" size 12 bold True color "#00c8ff" xalign 0.5
+                text "Conditional gates" size 11 color "#c4d2d7"
+
+            vbox:
                 text "ROUTES" size 12 bold True color "#00c8ff" xalign 0.5
                 text "Love / Hatred" size 11 color "#c4d2d7"
 
             vbox:
-                text "EVENTS" size 12 bold True color "#00c8ff" xalign 0.5
-                text "Persistent chain state" size 11 color "#c4d2d7"
-
-            vbox:
                 text "TOOLING" size 12 bold True color "#00c8ff" xalign 0.5
-                text "F2 event inspector" size 11 color "#c4d2d7"
+                text "F2 inspector" size 11 color "#c4d2d7"
 
     # --------------------------------------------------------
     # CHARACTER SHOWCASE
     # --------------------------------------------------------
-    add "images/characters/aya/aya_smile.png":
+    add "images/characters/aya/aya_neutral.png":
         xpos 390
         ypos 80
         zoom 0.68
         at v06_float
 
     # --------------------------------------------------------
-    # v0.7 FEATURE CARD
+    # v0.8 FEATURE CARD
     # --------------------------------------------------------
     frame:
         xpos 825
-        ypos 155
+        ypos 135
         xsize 395
-        ysize 390
+        ysize 430
         background Solid("#02090ed9")
         padding (26, 22)
         at v06_panel_in
 
         vbox:
-            spacing 12
+            spacing 10
 
-            text "NEW IN v0.7":
+            text "NEW IN v0.8":
                 size 13
                 bold True
                 color "#e7bd67"
 
-            text "Aya's Household":
+            text "Mission Control":
                 size 31
                 bold True
                 color "#ffffff"
 
-            text "A compact vertical slice built around room navigation, character availability and chained relationship events.":
-                size 16
+            text "A systems-heavy vertical slice built around mission dependencies, time-sensitive availability and route-aware outcomes.":
+                size 15
                 color "#bccbd1"
                 line_spacing 4
 
             null height 2
 
-            text "● Room-by-room navigation" size 15 color "#dceaf0"
-            text "● Green availability markers" size 15 color "#dceaf0"
-            text "● Five-stage event chain" size 15 color "#dceaf0"
-            text "● Love / Hatred reactions" size 15 color "#dceaf0"
-            text "● Persistent save state" size 15 color "#dceaf0"
+            text "● Mission requirements + lock reasons" size 14 color "#dceaf0"
+            text "● NPC schedules by time period" size 14 color "#dceaf0"
+            text "● Love / Hatred route reactions" size 14 color "#dceaf0"
+            text "● Persistent completion + rewards" size 14 color "#dceaf0"
+            text "● Multi-mission prerequisite chain" size 14 color "#dceaf0"
 
             null height 5
+
+            textbutton "PLAY MISSION CONTROL  →":
+                action Start("v08_mission_control_start")
+                style "v07_feature_button"
 
             textbutton "PLAY HOUSEHOLD DEMO  →":
                 action Start("v07_house_demo_start")
@@ -221,6 +235,6 @@ screen main_menu():
         background Solid("#020609ce")
         padding (18, 9)
 
-        text "Nightfall Village • Ren'Py + Python • Portfolio Build 0.7.0":
+        text "Nightfall Village • Ren'Py + Python • Portfolio Build 0.8.0":
             size 13
             color "#86a3af"
