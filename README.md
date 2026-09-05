@@ -1,4 +1,4 @@
-# Nightfall Village — Shinobi Sandbox Portfolio Demo v0.10.1
+# Nightfall Village — Shinobi Sandbox Portfolio Demo v0.10.2
 
 Original Ren'Py/Python portfolio project designed to demonstrate the systems and development workflow needed by a large nonlinear shinobi sandbox visual novel.
 
@@ -31,13 +31,18 @@ Original Ren'Py/Python portfolio project designed to demonstrate the systems and
 - Animated ambient particles on outdoor scenes
 
 ### v0.10.1 — Scenario Art Pass
-- Replaced flat prototype scenery with seven original cinematic backgrounds
-- Village Square, Market Alley, Training Ground, Riverside and Shrine Path each have dedicated art
-- Aya Household now has exterior and interior hallway artwork
-- World Hub destination cards use the matching location artwork
-- Assets are rebuilt and installed automatically on first launch after `git pull`
-- SHA-256 and ZIP integrity checks prevent corrupted art from silently loading
-- F2 Developer Tools reports `SCENARIO ART READY` or the exact installation error
+- Seven original cinematic backgrounds integrated into the sandbox
+- Dedicated art for Village Square, Market Alley, Training Ground, Riverside and Shrine Path
+- Aya Household exterior and interior hallway artwork
+- Scenario-art integrity validation and automatic installation
+
+### v0.10.2 — Cinematic Cleanup
+- Prototype geometric scenery is no longer composited over the finished backgrounds
+- Gameplay scenes now force a single clean cinematic background layer
+- World Hub cards are image-led and use matching destination art
+- Scene chrome was reduced to compact location/objective panels
+- The gameplay HUD no longer duplicates the World Hub header
+- Existing schedules, events, routes, inventory and save state remain unchanged
 
 ## Core sandbox systems
 
