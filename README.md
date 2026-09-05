@@ -1,4 +1,4 @@
-# Nightfall Village — Shinobi Sandbox Portfolio Demo v0.10.2
+# Nightfall Village — Shinobi Sandbox Portfolio Demo v0.10.3
 
 Original Ren'Py/Python portfolio project designed to demonstrate the systems and development workflow needed by a large nonlinear shinobi sandbox visual novel.
 
@@ -37,12 +37,18 @@ Original Ren'Py/Python portfolio project designed to demonstrate the systems and
 - Scenario-art integrity validation and automatic installation
 
 ### v0.10.2 — Cinematic Cleanup
-- Prototype geometric scenery is no longer composited over the finished backgrounds
-- Gameplay scenes now force a single clean cinematic background layer
-- World Hub cards are image-led and use matching destination art
-- Scene chrome was reduced to compact location/objective panels
-- The gameplay HUD no longer duplicates the World Hub header
-- Existing schedules, events, routes, inventory and save state remain unchanged
+- Removed the old geometric prototype layer from finished gameplay scenes
+- Reduced scene chrome so environment art remains visible
+- Preserved schedules, events, routes, inventory and save state
+
+### v0.10.3 — HQ Background Upgrade
+- Rebuilt all seven gameplay backgrounds as native 1280×720 masters
+- FSRCNN x4 super-resolution pass before native-resolution export
+- High-quality JPEG output with local-contrast and conservative detail recovery
+- HQ art is committed directly to `game/images/backgrounds/v103/`
+- World Hub destination cards use the same HQ assets as gameplay scenes
+- High-priority Ren'Py image definitions ensure old compact fallback art cannot override the HQ pass
+- GitHub Actions validates dimensions and output size before committing generated art
 
 ## Core sandbox systems
 
@@ -71,11 +77,11 @@ This project does **not** copy House of Shinobi characters, art, dialogue, CGs, 
 
 ## Recommended portfolio demos
 
-Start with **World Hub** to see the visual sandbox navigation and live location state. Visit several districts to see the dedicated scenario art, then launch **Household Demo** for room-based relationship events and **Mission Control** for mission dependencies and schedule-driven gameplay.
+Start with **World Hub** to see the visual sandbox navigation and live location state. Visit Village Square and Riverside to inspect the HQ scenario pass, then launch **Household Demo** for room-based relationship events and **Mission Control** for mission dependencies and schedule-driven gameplay.
 
 ## Developer shortcuts
 
-- **F2** — Developer Tools / Event Inspector / scenario-art diagnostic
+- **F2** — Developer Tools / Event Inspector / HQ-art diagnostic
 - **F3** — Portfolio Brief
 
 The Event Inspector evaluates the current save and shows whether events are READY or BLOCKED, including the unmet requirement.
