@@ -7,6 +7,12 @@ on:
     paths:
       - 'tools/build_v103_hq_backgrounds.py'
       - '.github/workflows/v103-hq-backgrounds.yml'
+  pull_request:
+    branches: [master]
+    paths:
+      - 'tools/build_v103_hq_backgrounds.py'
+      - '.github/workflows/v103-hq-backgrounds.yml'
+      - 'tools/v103-trigger.txt'
 
 permissions:
   contents: write
@@ -22,6 +28,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -31,7 +38,7 @@ jobs:
       - name: Install image tools
         run: |
           python -m pip install --upgrade pip
-          python -m pip install opencv-contrib-python-headless numpy
+          python -m pip install opencv-contrib-python-headless numpy pillow
 
       - name: Download FSRCNN x4 model
         run: |
@@ -74,4 +81,6 @@ jobs:
             exit 0
           fi
           git commit -m 'art: generate v0.10.3 HQ scenario backgrounds'
-          git push origin HEAD:master
+          BRANCH='${{ github.event.pull_request.head.ref }}'
+          if [ -z "$BRANCH" ]; then BRANCH='master'; fi
+          git push origin HEAD:"$BRANCH"
