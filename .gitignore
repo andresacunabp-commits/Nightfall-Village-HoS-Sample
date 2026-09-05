@@ -1,5 +1,6 @@
 game/cache/
 game/saves/
+game/images/backgrounds/v10/
 **/*.rpyc
 **/*.bak
 *.disabled.*
@@ -7,5 +8,6 @@ backup_before_*/
 _ui_backup_*/
 _v*_backup_*/
 *.log
+log.txt
 traceback.txt
 errors.txt

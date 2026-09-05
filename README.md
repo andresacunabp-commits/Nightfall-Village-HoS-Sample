@@ -1,4 +1,4 @@
-# Nightfall Village — Shinobi Sandbox Portfolio Demo v0.9
+# Nightfall Village — Shinobi Sandbox Portfolio Demo v0.10.1
 
 Original Ren'Py/Python portfolio project designed to demonstrate the systems and development workflow needed by a large nonlinear shinobi sandbox visual novel.
 
@@ -29,8 +29,15 @@ Original Ren'Py/Python portfolio project designed to demonstrate the systems and
 - Current objective surfaced directly in navigation
 - Per-location accent identity and scene chrome
 - Animated ambient particles on outdoor scenes
-- Stronger atmosphere and readability across all districts
-- Cinematic composites that enrich the original placeholder backgrounds
+
+### v0.10.1 — Scenario Art Pass
+- Replaced flat prototype scenery with seven original cinematic backgrounds
+- Village Square, Market Alley, Training Ground, Riverside and Shrine Path each have dedicated art
+- Aya Household now has exterior and interior hallway artwork
+- World Hub destination cards use the matching location artwork
+- Assets are rebuilt and installed automatically on first launch after `git pull`
+- SHA-256 and ZIP integrity checks prevent corrupted art from silently loading
+- F2 Developer Tools reports `SCENARIO ART READY` or the exact installation error
 
 ## Core sandbox systems
 
@@ -55,15 +62,15 @@ Original Ren'Py/Python portfolio project designed to demonstrate the systems and
 
 ## Portfolio positioning
 
-This project does **not** copy House of Shinobi characters, art, dialogue, CGs, story, or source code. It is an original sample created specifically to demonstrate relevant technical categories: sandbox navigation, schedules, time-sensitive events, relationship routes, progression gates, mission dependencies, persistent state, UI work, and developer tooling.
+This project does **not** copy House of Shinobi characters, art, dialogue, CGs, story, or source code. It is an original sample created specifically to demonstrate relevant technical categories: sandbox navigation, schedules, time-sensitive events, relationship routes, progression gates, mission dependencies, persistent state, UI work, visual integration, and developer tooling.
 
 ## Recommended portfolio demos
 
-Start with **World Hub** to see the visual sandbox navigation and live location state, then launch **Household Demo** for room-based relationship events and **Mission Control** for mission dependencies and schedule-driven gameplay.
+Start with **World Hub** to see the visual sandbox navigation and live location state. Visit several districts to see the dedicated scenario art, then launch **Household Demo** for room-based relationship events and **Mission Control** for mission dependencies and schedule-driven gameplay.
 
 ## Developer shortcuts
 
-- **F2** — Developer Tools / Event Inspector
+- **F2** — Developer Tools / Event Inspector / scenario-art diagnostic
 - **F3** — Portfolio Brief
 
-The Event Inspector evaluates the current save and shows whether events are READY or BLOCKED, including the unmet requirement. Mission Control applies the same philosophy to assignments and prerequisite chains.
+The Event Inspector evaluates the current save and shows whether events are READY or BLOCKED, including the unmet requirement.

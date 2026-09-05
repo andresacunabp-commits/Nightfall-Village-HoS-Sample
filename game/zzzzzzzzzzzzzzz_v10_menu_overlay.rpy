@@ -1,6 +1,6 @@
 # ============================================================
-# NIGHTFALL VILLAGE v0.10 — MAIN MENU PRESENTATION OVERLAY
-# Keeps the v0.9 navigation layout while presenting the new art pass.
+# NIGHTFALL VILLAGE v0.10.1 — MAIN MENU PRESENTATION OVERLAY
+# Keeps the v0.9 navigation layout while presenting the scenario art pass.
 # ============================================================
 
 screen nv10_main_menu_overlay():
@@ -8,7 +8,6 @@ screen nv10_main_menu_overlay():
 
     if renpy.get_screen("main_menu") is not None:
 
-        # Replace the old visible version footer without duplicating the menu.
         frame:
             xpos 18
             ypos 630
@@ -19,10 +18,9 @@ screen nv10_main_menu_overlay():
 
             vbox:
                 spacing 3
-                text "v0.10.0 • Scenario Art Pass" size 13 bold True color "#9edfec"
-                text "7 cinematic backgrounds • auto-installed" size 10 color "#607d88"
+                text ("v0.10.1 • Scenario Art READY" if NV10_BACKGROUNDS_READY else "v0.10.1 • Scenario Art ERROR") size 13 bold True color ("#9edfec" if NV10_BACKGROUNDS_READY else "#ff7f8f")
+                text ("7 cinematic backgrounds • validated" if NV10_BACKGROUNDS_READY else "Press F2 to view the art diagnostic") size 10 color "#607d88"
 
-        # Cover the previous v0.9 feature card with the current portfolio pitch.
         frame:
             xpos 820
             ypos 125
@@ -34,7 +32,7 @@ screen nv10_main_menu_overlay():
             vbox:
                 spacing 10
 
-                text "NEW IN v0.10" size 12 bold True color "#e4bd68"
+                text "NEW IN v0.10.1" size 12 bold True color "#e4bd68"
                 text "Scenario Art Pass" size 30 bold True color "#ffffff"
                 text "The flat prototype scenery has been replaced by original cinematic shinobi-village backgrounds integrated directly into the game." size 15 color "#bdcbd1" line_spacing 3
 
@@ -63,7 +61,7 @@ screen nv10_main_menu_overlay():
             background Solid("#020609ef")
             padding (15, 8)
 
-            text "Nightfall Village • Ren'Py + Python • Portfolio Build 0.10.0":
+            text "Nightfall Village • Ren'Py + Python • Portfolio Build 0.10.1":
                 size 12
                 color "#8aa6b1"
 
