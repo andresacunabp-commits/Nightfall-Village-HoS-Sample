@@ -1,0 +1,77 @@
+name: Build v0.10.3 HQ Backgrounds
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - 'tools/build_v103_hq_backgrounds.py'
+      - '.github/workflows/v103-hq-backgrounds.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build-hq-art:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install image tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install opencv-contrib-python-headless numpy
+
+      - name: Download FSRCNN x4 model
+        run: |
+          curl -fL --retry 3 \
+            'https://github.com/Saafke/FSRCNN_Tensorflow/raw/master/models/FSRCNN_x4.pb' \
+            -o tools/FSRCNN_x4.pb
+          test -s tools/FSRCNN_x4.pb
+
+      - name: Generate native-resolution HQ backgrounds
+        run: python tools/build_v103_hq_backgrounds.py
+
+      - name: Verify outputs
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          names = [
+              'village_square.jpg', 'market_alley.jpg', 'training_ground.jpg',
+              'riverside.jpg', 'shrine_path.jpg', 'aya_house_ext.jpg',
+              'aya_house_hallway.jpg'
+          ]
+          root = Path('game/images/backgrounds/v103')
+          for name in names:
+              p = root / name
+              if not p.exists() or p.stat().st_size < 100_000:
+                  raise SystemExit(f'Invalid HQ output: {p}')
+              with Image.open(p) as im:
+                  if im.size != (1280, 720):
+                      raise SystemExit(f'Wrong size for {p}: {im.size}')
+              print(name, p.stat().st_size)
+          PY
+
+      - name: Commit generated art
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add game/images/backgrounds/v103/
+          if git diff --cached --quiet; then
+            echo 'No generated changes to commit.'
+            exit 0
+          fi
+          git commit -m 'art: generate v0.10.3 HQ scenario backgrounds'
+          git push origin HEAD:master
