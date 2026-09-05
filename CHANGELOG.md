@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.10.3
+- Rebuilt all seven scenario backgrounds as native 1280×720 assets.
+- Added FSRCNN x4 super-resolution generation before native-resolution export.
+- Added local-contrast recovery and conservative sharpening.
+- Exported high-quality JPEG masters directly into the repository.
+- Updated gameplay scene definitions and World Hub thumbnails to use the HQ art.
+- Added GitHub Actions validation for image dimensions and minimum output size.
+- Updated visible build version to 0.10.3.
+
 ## 0.10.2
 - Removed the old geometric prototype layer from gameplay scenes.
 - Forced the cinematic scenario artwork to be the final background authority.
@@ -16,7 +25,6 @@
 - Added SHA-256 and ZIP integrity validation for generated assets.
 - Added developer-facing scenario-art diagnostics.
 - Updated visible project version and portfolio documentation.
-- Removed obsolete patch artifacts and experimental scenario-art package files from the current tree.
 
 ## 0.9.0
 - Added cinematic World Hub navigation.
