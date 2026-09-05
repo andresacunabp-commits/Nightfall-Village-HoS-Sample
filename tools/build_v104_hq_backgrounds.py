@@ -1,3 +1,4 @@
+# v0.10.4 EDSR rebuild trigger after workflow rebase fix.
 import base64
 import io
 import os
@@ -46,8 +47,6 @@ def reconstruct_archive():
 
 
 def restore_detail(image):
-    # Mild local contrast and edge restoration after EDSR. This is deliberately
-    # stronger than the v0.10.3 pass, but avoids obvious halos around lanterns.
     lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
     l, a, b = cv2.split(lab)
     clahe = cv2.createCLAHE(clipLimit=1.55, tileGridSize=(10, 10))
@@ -57,7 +56,6 @@ def restore_detail(image):
     blur = cv2.GaussianBlur(image, (0, 0), 1.05)
     image = cv2.addWeighted(image, 1.34, blur, -0.34, 0)
 
-    # A tiny edge boost makes architecture read better at 1280x720.
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     edges = cv2.Laplacian(gray, cv2.CV_16S, ksize=3)
     edges = cv2.convertScaleAbs(edges)
