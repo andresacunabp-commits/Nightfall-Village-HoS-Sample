@@ -1,5 +1,5 @@
 # ============================================================
-# NIGHTFALL VILLAGE v0.12.4 — FULL CLEAN MAIN MENU ART
+# NIGHTFALL VILLAGE v0.13.0 — FULL CLEAN MAIN MENU ART
 # ============================================================
 # Uses the clean Aya artwork already added as load_bg.png.
 # No crop: the whole illustration is shown across the 1280x720 menu.
@@ -47,7 +47,7 @@ screen main_menu():
                 ypos 190
                 spacing 5
 
-                textbutton "COMENZAR" action Start("nv12_start") style "nv121_menu_primary"
+                textbutton "COMENZAR" action Start("nv130_start") style "nv121_menu_primary"
                 textbutton "CARGAR" action ShowMenu("load") style "nv121_menu_button"
                 textbutton "GALERÍA" action ShowMenu("nv12_gallery") style "nv121_menu_button"
                 textbutton "REPETIR ESCENAS" action ShowMenu("nv12_replay") style "nv121_menu_button"
