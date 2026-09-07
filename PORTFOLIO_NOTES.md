@@ -1,46 +1,55 @@
-# Portfolio / Interview Notes
+# Portfolio / Interview Notes — v0.15.0
 
-These notes are for explaining the project in a developer conversation.
+These are concise talking points for explaining Nightfall Village in a developer conversation.
 
-## 1. How does the event system work?
+## 1. What did you build?
 
-Events are data-driven. Each event has rules such as location, time of day,
-minimum day, required quest state, items, stats, relationship values and priority.
+A Ren'Py/Python sandbox visual-novel sample with a persistent playthrough, free location movement, time periods, NPC schedules, conditional events, relationship routes, inventory/progression, room-by-room exploration, a dynamic map, custom save/load UI, and developer inspection tools.
 
-When the player enters a location, `next_event_for()` checks the rules and chooses
-the highest-priority event that is currently valid.
+## 2. How does the event system work?
 
-## 2. Why separate `events.rpy` and `systems.rpy`?
+Events are data-driven. Each event can define requirements such as location, time of day, minimum day, prior quest state, items, stats, relationship values, and priority. The resolver checks current save state and selects the highest-priority valid event.
 
-`events.rpy` contains narrative content.
-`systems.rpy` contains reusable gameplay rules.
+This lets content scale without turning every location into one giant chain of nested `if` statements.
 
-This makes it easier to add new scenes without turning one file into a huge chain of conditions.
+## 3. Why separate `events.rpy` and `systems.rpy`?
 
-## 3. How do branching relationships work?
+`events.rpy` is narrative content. `systems.rpy` is reusable game logic: requirements, schedules, relationships, inventory, progression helpers, and event resolution.
 
-Each character can hold more than one relationship dimension.
-Aya currently has `bond` and `rivalry`.
+That separation makes it easier to add or debug content without rewriting the underlying rules.
 
-Choices modify these values independently. `dominant_route()` turns those values
-into a higher-level route that other events can check.
+## 4. How does navigation work now?
 
-## 4. How does the guide avoid spoilers?
+The player remains inside one persistent save and chooses where to move. Small areas use a contextual bottom dock with icon-based direct movement. Scene objects use invisible/low-noise hotspots: hover reveals the name and click performs the action directly. Larger travel uses a manual world map with circular location previews.
 
-It does not contain full walkthrough text.
-It inspects current quest states and flags, then gives the next broad objective.
+## 5. How do relationships work?
 
-## 5. Why use dictionaries for this demo?
+Relationship values are persistent save state and can affect dialogue, event eligibility, room access, and later branches. The current Aya route demonstrates Love / Hatred-style branching rather than a single linear affection score.
 
-They are easy to inspect, save, debug, and explain while learning Ren'Py.
-If the project became much larger, the next refactor would introduce reusable
-data classes / managers and validation tools for event definitions.
+## 6. How do schedules and time work?
 
-## 6. What would I work on next?
+The day is divided into Morning / Day / Evening / Night. NPC location and event availability can depend on the current period. The village map also switches artwork with the period so the visual state matches the simulation state.
 
-- debug tools for changing day, stats and flags;
-- event dependency visualizer;
-- automated checks for impossible event requirements;
-- reusable quest journal;
-- localization;
-- cleaner UI and assets.
+## 7. How do you debug blocked content?
+
+The developer tools inspect current event requirements and show why content is ready or blocked. This is useful in a sandbox because an event can depend on several dimensions at once: day, period, relationship, quest state, items, stats, or previous events.
+
+## 8. What was the hardest part?
+
+Keeping many iterative UI/navigation layers compatible while changing the game from a portfolio hub into a persistent sandbox. The final candidate keeps the stable versioned modules that are still active, removes obsolete build tooling/stubs, and documents the active runtime layers in `ARCHITECTURE.md` instead of doing a risky last-minute rewrite before presentation.
+
+## 9. What is original and what is AI-assisted?
+
+The Ren'Py/Python implementation, state systems, event logic, UI integration, navigation behavior, debugging workflow, and project structure are the portfolio focus. Some environment and character presentation artwork is AI-assisted prototype art. The repository does not contain House of Shinobi proprietary source, characters, dialogue, story, or extracted assets.
+
+## 10. What would you improve in a production codebase?
+
+- migrate the remaining versioned compatibility modules into a smaller production package after a regression-test pass;
+- add automated event-graph validation for impossible requirement combinations;
+- add localization from the beginning of new content production;
+- add more unit-like tests around pure Python rule helpers;
+- introduce content-authoring validation and editor tooling as the event catalog grows.
+
+## 11. What can you contribute first on a real project?
+
+Event/dialogue scripting, implementing location interactions, conditional content, testing and reproducing bugs, UI integration, save-safe state changes, and developer tooling. The sample is intended to show that I can learn a real project's conventions and work incrementally without needing to own the entire architecture on day one.

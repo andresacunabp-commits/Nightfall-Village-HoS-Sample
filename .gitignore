@@ -11,3 +11,7 @@ _v*_backup_*/
 log.txt
 traceback.txt
 errors.txt
+lint.txt
+dists/
+dist/
+build/

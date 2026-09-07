@@ -1,33 +1,45 @@
+# Nightfall Village — Directly Relevant Sandbox VN Sample
 
-# Nightfall Village — Direct House-of-Shinobi-Related Sample
+Nightfall Village was built specifically as a portfolio sample for work on a large nonlinear shinobi sandbox visual novel.
 
-This build is intentionally prepared as a **directly relevant portfolio sample** for a sandbox visual-novel development role.
+It does **not** reuse House of Shinobi source code, proprietary art, characters, dialogue, story content, logos, or extracted assets. Instead, it demonstrates development categories that are directly relevant to that kind of project:
 
-The project does **not** reuse House of Shinobi art, characters, dialogue, logos, or source code. Instead, it demonstrates the same categories of development problems a developer on that type of project would work with:
-
-- Ren'Py + Python;
-- nonlinear location navigation;
-- day / time periods;
+- Ren'Py + Python scripting;
+- persistent sandbox playthroughs;
+- free location navigation;
+- room-by-room household movement;
+- hover/click interactive hotspots;
+- image-based world travel;
+- Morning / Day / Evening / Night state;
 - NPC schedules;
-- Love / Hatred relationship values;
-- relationship-gated events;
-- stat- and item-gated events;
-- quest flags and event chains;
+- Love / Hatred relationship routes;
+- stat-, item-, relationship-, quest-, and time-gated events;
+- event priority and prerequisite chains;
 - unlockable locations;
-- repeatable multi-stage content;
-- interactive objectives / guide;
-- event gallery / progress log;
-- save / load presentation;
-- developer event inspector and F2 debug tools;
-- a custom dark/cyan sandbox UI designed specifically around the reference layout requested for the application sample.
+- repeatable multi-stage interactions;
+- save/load presentation and save-safe defaults;
+- event discovery / replay / guide UI;
+- developer event inspection and fast condition testing.
+
+## Current UX sample
+
+The current candidate uses a polished icon HUD, a contextual bottom navigation dock, direct hover interactions, and a manually opened dynamic world map with circular destination previews. These are implemented as original Ren'Py screens and Python helpers using original project data.
 
 ## Portfolio talking point
 
-> I built this sample specifically around the needs of a large Ren'Py sandbox VN: content gating, schedules, branching relationship state, event inspection and fast developer testing. I kept narrative content and assets original while intentionally making the UX familiar to the target project.
+> I built this sample around the workflow problems of a large Ren'Py sandbox VN: persistent state, schedules, conditional event gating, relationship branches, location navigation, debugging blocked content, and iterating UI without breaking saves. I kept the implementation and narrative content original while making the interaction flow directly relevant to the type of project I want to contribute to.
 
 ## Useful files to discuss
 
-- `systems.rpy` — event requirements, schedules, relationships, inventory and state.
-- `events.rpy` — story event content.
-- `screens.rpy` — original functional UI and developer tools.
-- `zzzzz_hos_showcase_ui.rpy` — direct-sample visual layer.
+- `game/systems.rpy` — reusable rules and persistent systems.
+- `game/events.rpy` — narrative/event content.
+- `game/script.rpy` — main sandbox/action flow.
+- `game/zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_v130_interactive_world.rpy` — scene model and exploration.
+- `game/zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_v145_direct_hover_navigation.rpy` — direct interaction UX.
+- `game/zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_v147_map_png_mask_fix.rpy` — dynamic circular map.
+- `game/zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_v147_restore_polished_hud.rpy` — polished HUD.
+- `game/zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_v148_hos_location_dock.rpy` — contextual location dock.
+
+## Asset disclosure
+
+Some environment and character presentation artwork is AI-assisted prototype art. The sample is presented primarily as a programming, systems, UX-integration, and debugging portfolio piece.

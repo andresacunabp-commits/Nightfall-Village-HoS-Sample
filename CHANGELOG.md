@@ -1,48 +1,77 @@
 # Changelog
 
+## 0.15.0 — Portfolio Candidate
+- Froze the feature set for portfolio presentation.
+- Added reviewer-facing README, architecture notes, QA checklist, interview notes, and a 60–90 second video script.
+- Added transparent disclosure for AI-assisted prototype artwork.
+- Added automated portfolio audit and Windows candidate-build workflow.
+- Removed obsolete v0.10.3/v0.10.4 background-generation workflows and retired placeholder/version-marker files.
+- Removed the always-visible F2/F3 developer hint from normal gameplay while keeping development shortcuts available in developer mode.
+- Standardized visible candidate version to 0.15.0.
+
+## 0.14.7
+- Added a HoS-style contextual bottom location dock.
+- Added circular line icons for rooms and world sublocations.
+- Added hover-only location names, direct travel, current-location highlighting, and green availability markers.
+- Extended contextual navigation across Home, Aya House, Village, Market, Training, Riverside, Shrine, and Archive.
+
+## 0.14.6
+- Replaced runtime SVG map masking with an exact 116×116 PNG alpha mask.
+- Fixed `AlphaMask surfaces must be the same size` on circular map previews.
+
+## 0.14.5
+- Restored the polished icon-based HUD as the single top gameplay HUD.
+- Routed its MAP control to the new dynamic circular map.
+
+## 0.14.4
+- Reworked scene interactions to use hover-only labels and direct click behavior.
+- Removed confirmation menus from ordinary movement and interaction.
+- Restored real location images inside circular map nodes.
+
+## 0.14.3
+- Added contextual interaction highlighting and circular map-node presentation.
+
+## 0.14.2
+- Integrated the full 21-image master environment pack for Aya House, Village, Market, Training, Riverside, Shrine, and Archive.
+- Re-aligned world hotspots to the final master artwork.
+
+## 0.14.1
+- Integrated four 1920×1080 dynamic map masters for Morning, Day, Evening, and Night.
+- Re-aligned map destinations to the new village geography.
+
+## 0.14.0
+- Integrated six 1920×1080 protagonist-home master backgrounds.
+- Re-aligned room hotspots to the final home art.
+
+## 0.12.x–0.13.x
+- Rebuilt the project from a portfolio hub into a persistent story-driven sandbox playthrough.
+- Made the world map manual rather than automatic.
+- Added custom load/menu presentation, multi-room exploration, scene hotspots, and higher-resolution art routing.
+
+## 0.11.0
+- Replaced earlier upscaled scenario experiments with native high-quality master art.
+
 ## 0.10.3
-- Rebuilt all seven scenario backgrounds as native 1280×720 assets.
-- Added FSRCNN x4 super-resolution generation before native-resolution export.
-- Added local-contrast recovery and conservative sharpening.
-- Exported high-quality JPEG masters directly into the repository.
-- Updated gameplay scene definitions and World Hub thumbnails to use the HQ art.
-- Added GitHub Actions validation for image dimensions and minimum output size.
-- Updated visible build version to 0.10.3.
+- Rebuilt seven scenario backgrounds at native 1280×720 after an FSRCNN pass.
+- Added automated image validation.
 
 ## 0.10.2
-- Removed the old geometric prototype layer from gameplay scenes.
-- Forced the cinematic scenario artwork to be the final background authority.
-- Rebuilt the World Hub around image-led destination cards.
-- Reduced scene chrome so the environment art remains visible.
-- Prevented the gameplay HUD from duplicating the World Hub header.
-- Preserved all existing sandbox logic, schedules, routes, events and saves.
+- Removed the old geometric prototype layer from finished gameplay scenes.
 
 ## 0.10.1
-- Replaced flat prototype scenery with seven dedicated cinematic location backgrounds.
-- Added Village Square, Market Alley, Training Ground, Riverside and Shrine Path art.
-- Added Aya Household exterior and interior hallway art.
-- Added automatic Git-friendly scenario-art reconstruction on launch.
-- Added SHA-256 and ZIP integrity validation for generated assets.
-- Added developer-facing scenario-art diagnostics.
-- Updated visible project version and portfolio documentation.
+- Added the first cinematic scenario-art pass.
 
 ## 0.9.0
-- Added cinematic World Hub navigation.
-- Added live destination cards, current objective, event status and NPC presence.
-- Added per-location visual identity and ambient overlays.
+- Added the original visual world-navigation prototype.
 
 ## 0.8.0
-- Added Mission Control with mission prerequisites, time gates and live lock reasons.
-- Added schedule-driven mission progression and route-aware mission scenes.
+- Added Mission Control with mission prerequisites, time gates, and live lock reasons.
 
 ## 0.7.0
-- Added Aya Household vertical slice with room navigation and route-reactive event chain.
+- Added the Aya Household vertical slice with room navigation and route-reactive events.
+
+## 0.6.x
+- Added polished UI, dialogue, relationship presentation, save/load work, and developer tools.
 
 ## 0.2.0
-- Added data-driven event requirement system.
-- Added event priority.
-- Added four-part day cycle.
-- Added NPC schedules.
-- Added relationship routes, Strength and Reputation stats.
-- Added quest states, item requirements and unlockable household location.
-- Added interactive guide, map, relationship and inventory screens.
+- Added the data-driven event requirement system, day cycle, NPC schedules, relationships, stats, inventory, quest state, unlockable locations, and guide systems.

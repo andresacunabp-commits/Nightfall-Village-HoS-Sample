@@ -26,18 +26,15 @@ init -500 python:
             ("Inventory helpers", callable(globals().get("has_item", None))),
         ]
 
+# Development shortcuts remain available while running from the SDK, but the
+# old always-visible F2/F3 footer is intentionally removed for presentation.
 screen nv_global_controls():
     zorder 999
-    key "K_F2" action Show("developer_tools")
-    key "K_F3" action Show("nv_portfolio_screen")
 
-    if renpy.get_screen("main_menu") is None:
-        frame:
-            xpos 1080
-            ypos 690
-            background Solid("#02070aa8")
-            padding (9, 3)
-            text "F2 DEV • F3 PORTFOLIO" size 10 color "#6b8d9a"
+    if config.developer:
+        key "K_F2" action Show("developer_tools")
+        key "K_F3" action Show("nv_portfolio_screen")
+
 
 screen nv_portfolio_screen():
     modal True
@@ -86,6 +83,7 @@ screen nv_portfolio_screen():
                             text _title size 15 bold True color "#00c8ff"
                             text _desc size 14 color "#d2dde1"
 
+
 screen nv_system_health():
     modal True
     zorder 1010
@@ -121,6 +119,7 @@ screen nv_system_health():
                         text _name size 17 color "#dce9ed"
                         text ("READY" if _ok else "MISSING") size 15 bold True color ("#58e89a" if _ok else "#ff6c7d") xalign 1.0
 
+
 screen nv_dev_launcher():
     zorder 998
     if renpy.get_screen("developer_tools") is not None:
@@ -133,6 +132,7 @@ screen nv_dev_launcher():
                 spacing 8
                 textbutton "SYSTEM HEALTH" action Show("nv_system_health") style "v06_small_button"
                 textbutton "PORTFOLIO BRIEF" action Show("nv_portfolio_screen") style "v06_small_button"
+
 
 init 1500 python:
     for _overlay in ("nv_global_controls", "nv_dev_launcher"):
