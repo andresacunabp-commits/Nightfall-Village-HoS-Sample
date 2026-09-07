@@ -1,9 +1,8 @@
 # ============================================================
 # NIGHTFALL VILLAGE v0.14.7 — HoS-STYLE LOCATION DOCK
 # ============================================================
-# Contextual bottom navigation for multi-room houses.
-# Inspired by the interaction pattern the portfolio is targeting:
-# circular room icons, hover-only names, direct travel and green
+# Contextual bottom navigation across the explorable world.
+# Circular line icons, hover-only names, direct travel and green
 # availability dots. The polished v0.6 top HUD remains untouched.
 # ============================================================
 
@@ -34,6 +33,44 @@ init 28000 python:
             ("aya_hallway",   "PASILLO",           NV147_DOCK_ROOT + "/hallway.svg",  "always"),
             ("aya_exterior",  "EXTERIOR",          NV147_DOCK_ROOT + "/exterior.svg", "always"),
         ),
+
+        "square": (
+            ("residential_street", "RESIDENCIAL",     NV147_DOCK_ROOT + "/exterior.svg", "always"),
+            ("village_square",     "PLAZA",            NV147_DOCK_ROOT + "/square.svg",   "always"),
+            ("market_entrance",    "MERCADO",          NV147_DOCK_ROOT + "/market.svg",   "always"),
+            ("training_gate",      "ENTRENAMIENTO",    NV147_DOCK_ROOT + "/training.svg", "always"),
+            ("riverside_path",     "RÍO",              NV147_DOCK_ROOT + "/river.svg",    "always"),
+        ),
+
+        "market": (
+            ("market_entrance",     "ENTRADA",          NV147_DOCK_ROOT + "/exterior.svg", "always"),
+            ("market_street",       "CALLE DEL MERCADO", NV147_DOCK_ROOT + "/market.svg",  "always"),
+            ("market_night_stall",  "PUESTO NOCTURNO",   NV147_DOCK_ROOT + "/market.svg",  "night"),
+        ),
+
+        "training": (
+            ("training_gate", "ENTRADA", NV147_DOCK_ROOT + "/exterior.svg", "always"),
+            ("training_yard", "PATIO",   NV147_DOCK_ROOT + "/training.svg", "always"),
+            ("training_dojo", "DOJO",    NV147_DOCK_ROOT + "/training.svg", "always"),
+        ),
+
+        "riverside": (
+            ("riverside_path",   "SENDERO",      NV147_DOCK_ROOT + "/river.svg",  "always"),
+            ("riverside_bridge", "PUENTE VIEJO", NV147_DOCK_ROOT + "/river.svg",  "always"),
+            ("riverside_bank",   "ORILLA",       NV147_DOCK_ROOT + "/river.svg",  "always"),
+            ("shrine_path",      "SANTUARIO",    NV147_DOCK_ROOT + "/shrine.svg", "old_shrine"),
+        ),
+
+        "old_shrine": (
+            ("shrine_path",    "SENDERO",        NV147_DOCK_ROOT + "/shrine.svg",  "always"),
+            ("old_shrine",     "SANTUARIO VIEJO", NV147_DOCK_ROOT + "/shrine.svg", "always"),
+            ("hidden_passage", "PASAJE OCULTO",   NV147_DOCK_ROOT + "/archive.svg", "archive"),
+        ),
+
+        "archive": (
+            ("hidden_passage", "PASAJE",  NV147_DOCK_ROOT + "/shrine.svg",  "archive"),
+            ("archive",        "ARCHIVO", NV147_DOCK_ROOT + "/archive.svg", "archive"),
+        ),
     }
 
     def nv147_dock_items(scene_id):
@@ -43,6 +80,7 @@ init 28000 python:
         return NV147_LOCATION_DOCKS.get(data.get("zone"), ())
 
     def nv147_dock_attention(scene_id):
+        # Green dot = a character or non-routine event is ready there.
         try:
             if nv130_here_aya(scene_id):
                 return True
@@ -50,6 +88,11 @@ init 28000 python:
                 return True
             if scene_id == "market_night_stall" and store.period_index == 3:
                 return True
+
+            data = NV130_SCENES.get(scene_id, {})
+            for _label, _action_id, _x, _y, _gate in data.get("actions", []):
+                if _gate not in ("always", "energy", "day_shop") and nv130_gate(_gate):
+                    return True
         except Exception:
             pass
         return False
@@ -172,6 +215,7 @@ screen nv147_location_dock():
                         textbutton "Guard. rápido" action QuickSave() style "nv147_dock_utility"
                         textbutton "Preferencias" action ShowMenu("preferences") style "nv147_dock_utility"
 
+            # Hover-only room/location name, just above the dock.
             if nv147_dock_hover is not None:
                 $ _hover_label = ""
                 $ _hover_open = True
