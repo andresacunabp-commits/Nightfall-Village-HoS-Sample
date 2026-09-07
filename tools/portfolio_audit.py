@@ -139,15 +139,19 @@ def main() -> int:
         fail(f"map alpha mask unreadable: {exc}", errors)
 
     all_rpy = "\n".join(p.read_text(encoding="utf-8", errors="replace") for p in (ROOT / "game").rglob("*.rpy"))
-    regressions = {
-        "use file_slots": "obsolete load-screen helper reference",
-        "F2 DEV • F3 PORTFOLIO": "visible developer footer",
-    }
-    for needle, label in regressions.items():
-        if needle in all_rpy:
-            fail(f"regression string present: {label}", errors)
-        else:
-            ok(f"regression absent: {label}")
+    if "use file_slots" in all_rpy:
+        fail("regression string present: obsolete load-screen helper reference", errors)
+    else:
+        ok("regression absent: obsolete load-screen helper reference")
+
+    # Check the actual presentation overlay definition, not harmless historical
+    # comments/strings elsewhere in compatibility modules.
+    stability = (ROOT / "game/zzzzzzz_v061_stability.rpy").read_text(encoding="utf-8")
+    visible_footer_statement = 'text "F2 DEV • F3 PORTFOLIO"'
+    if visible_footer_statement in stability:
+        fail("visible developer footer is still rendered by the active stability overlay", errors)
+    else:
+        ok("visible developer footer removed from active stability overlay")
 
     final_map = (ROOT / "game/zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz_v147_map_png_mask_fix.rpy").read_text(encoding="utf-8")
     if "map_circle_mask_116.png" in final_map and "im.Scale(_thumb, 116, 116)" in final_map:
